@@ -2,6 +2,8 @@ package com.bravo.user.utility;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -12,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@TestInstance(Lifecycle.PER_CLASS)
 class PageUtilTest {
     MockHttpServletResponse mHttpServletResponse;
     Page<?> mPage;
@@ -68,9 +71,9 @@ class PageUtilTest {
 
         PageUtil.updatePageHeaders(mHttpServletResponse, mPage, pRequest);
 
-        assertEquals(mHttpServletResponse.getHeader("page-count"), mPage.getTotalPages());
-        assertEquals(mHttpServletResponse.getHeader("page-number"), pRequest.getPageNumber());
-        assertEquals(mHttpServletResponse.getHeader("page-size"), pRequest.getPageSize());
+        assertEquals(mHttpServletResponse.getHeader("page-count"), String.valueOf(mPage.getTotalPages()));
+        assertEquals(mHttpServletResponse.getHeader("page-number"), String.valueOf(pRequest.getPageNumber() + 1));
+        assertEquals(mHttpServletResponse.getHeader("page-size"), String.valueOf(pRequest.getPageSize()));
     }
 
 }
