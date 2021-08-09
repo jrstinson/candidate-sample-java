@@ -1,7 +1,6 @@
 package com.bravo.user.model.dto;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 public class ReflectFieldDto<T> {
@@ -10,12 +9,12 @@ public class ReflectFieldDto<T> {
   private String field;
   private T value;
 
-  public ReflectFieldDto(final Class<T> type){
+  public ReflectFieldDto(final Class<T> type) {
     super();
     this.type = type;
   }
 
-  public void setValue(Object obj){
+  public void setValue(Object obj) {
     this.value = type.cast(obj);
   }
 }

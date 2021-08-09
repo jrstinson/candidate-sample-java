@@ -1,6 +1,6 @@
 package com.bravo.user.utility;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -17,11 +17,17 @@ class DateUtilTest {
         now = LocalDateTime.now();
     }
 
+    /*
+     * Tests result of DateTimeFormatter.format() against correctly formatted date
+     * string.
+     */
+
     @Test
     void shouldProvideDateOnlyFormat() {
         dTimeFormatter = DateUtil.DATE_FORMAT;
         assertEquals(dTimeFormatter.format(now), String.format("%04d", now.getYear()) + "-"
                 + String.format("%02d", now.getMonthValue()) + "-" + String.format("%02d", now.getDayOfMonth()));
+
     }
 
     @Test
